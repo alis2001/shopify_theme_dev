@@ -1,0 +1,26 @@
+[
+    {
+      "name": "Impostazioni del Tema",
+      "settings": [
+        {
+          "type": "text",
+          "id": "header_title",
+          "label": "Titolo Header",
+          "default": "Glassteam - Profumi di Lusso"
+        },
+        {
+          "type": "color",
+          "id": "primary_color",
+          "label": "Colore Primario",
+          "default": "#D2B48C"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Colore di Sfondo",
+          "default": "#F5F5DC"
+        }
+      ]
+    }
+  ]
+  

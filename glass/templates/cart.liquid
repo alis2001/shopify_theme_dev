@@ -1,0 +1,55 @@
+{% comment %}
+  Cart Template: Displays items in the cart, their quantities, pricing,
+  and a Checkout button.
+{% endcomment %}
+
+<div class="container my-5 cart-page">
+  <h1 class="text-center mb-4">Il Tuo Carrello</h1>
+  
+  {% if cart.item_count > 0 %}
+    <div class="cart-items">
+      <table class="table cart-table">
+        <thead>
+          <tr>
+            <th>Prodotto</th>
+            <th>Quantità</th>
+            <th>Prezzo Unitario</th>
+            <th>Totale</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart.items %}
+            <tr>
+              <td>
+                <a href="{{ item.url }}">
+                  {% if item.image %}
+                    <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.product.title }}" class="cart-image">
+                  {% endif %}
+                  {{ item.product.title }}
+                </a>
+              </td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.price | money }}</td>
+              <td>{{ item.line_price | money }}</td>
+              <td>
+                <form action="/cart/change" method="post">
+                  <input type="hidden" name="id" value="{{ item.key }}">
+                  <button type="submit" name="quantity" value="0" class="btn btn-link text-danger">Rimuovi</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="cart-summary text-center mt-4">
+      <h4>Subtotale: {{ cart.total_price | money }}</h4>
+      <a href="/checkout" class="btn btn-primary btn-lg">Procedi al Checkout</a>
+    </div>
+    
+  {% else %}
+    <p class="text-center">Il tuo carrello è vuoto.</p>
+  {% endif %}
+</div>

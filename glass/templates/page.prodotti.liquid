@@ -1,0 +1,41 @@
+{% comment %}
+  Collection Page Template: Displays a grid of products from the "featured" collection,
+  with each product shown inside a beautifully styled, rounded frame.
+{% endcomment %}
+
+{% assign collection = collections['featured'] %}
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">{{ collection.title }}</h1>
+  <div class="row">
+    {% for product in collection.products %}
+      <div class="col-6 col-md-3 mb-4">
+        <div class="product-card custom-product-frame text-center">
+          <a href="{{ product.url }}">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" class="img-fluid mb-2">
+            {% else %}
+              <div class="bg-secondary text-white p-3 mb-2">No Image</div>
+            {% endif %}
+            <h3 class="h6">{{ product.title }}</h3>
+            <p class="price">{{ product.price | money }}</p>
+            {% if product.compare_at_price > product.price %}
+              <p class="compare-price" style="color: #888; font-size: 0.9rem;">
+                <s>{{ product.compare_at_price | money }}</s>
+              </p>
+            {% endif %}
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  
+  {% if collection.products_count | plus: 0 > collection.products.size | plus: 0 %}
+    <!-- Optional Pagination -->
+    <div class="text-center">
+      {% paginate collection.products by 12 %}
+        {{ paginate | default_pagination }}
+      {% endpaginate %}
+    </div>
+  {% endif %}
+</div>

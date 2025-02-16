@@ -1,0 +1,597 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+
+/* Base Reset & Typography */
+body, h1, h2, h3, h4, p, ul, li, a {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #F5F5DC; /* Classic beige background */
+  line-height: 1.6;
+  color: #333;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Link Styles */
+a {
+  color: #D2B48C; /* Light taupe accent */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #C0A16B;
+}
+
+/* Header */
+header {
+  background-color: white;
+  padding: 10px 0;
+  border-bottom: 2px solid #D2B48C;
+  min-height: 80px;   /* Minimum header height */
+  position: sticky;   /* Stays at top and expands when needed */
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+
+header .nav-link {
+  font-family: 'Open Sans', sans-serif;
+  color: #333 !important;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 10px;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+header .nav-link:hover {
+  color: #C0A16B;
+  font-weight: bold;  /* Bold on hover */
+}
+
+/* Horizontal Dropdown Menu for Desktop (if needed) */
+@media (min-width: 992px) {
+  .dropdown-menu {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem 1rem;
+  }
+  .dropdown-menu .dropdown-item {
+    white-space: nowrap;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+  }
+  .dropdown-menu .dropdown-item:hover {
+    background-color: rgba(210, 180, 140, 0.2);
+  }
+  .navbar-nav .dropdown .dropdown-toggle::after {
+    display: none;
+  }
+}
+
+/* Hero Video Section */
+.hero-video {
+  position: relative;
+  margin-bottom: 0;
+}
+
+.hero-video video {
+  width: 100%;
+  object-fit: cover;
+  height: 740px;  /* Default height for mobile */
+}
+
+@media (min-width: 992px) {
+  .hero-video video {
+    height: 795px;  /* Larger height for desktop screens */
+  }
+}
+
+/* Hero Video Overlay */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);  /* Subtle dark overlay */
+}
+
+.hero-video .video-overlay .text-center h1 {
+  font-size: 3.5rem;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+}
+.hero-video .video-overlay .text-center p {
+  font-size: 1.5rem;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+}
+
+/* Product Slider Section */
+.product-slider-container {
+  position: relative;
+  margin: 2rem 0;
+}
+
+/* Product Slider: horizontal scroll area */
+.product-slider-container {
+  position: relative;
+  margin: 2rem 0;
+}
+
+/* Product Slider: horizontal scroll area */
+.product-slider {
+  display: flex;
+  overflow-x: hidden;  /* Disable manual scrolling */
+  scroll-behavior: smooth;
+}
+
+/* Product Card Styles */
+/* Product Slider Container */
+.product-slider-container {
+  position: relative;
+  margin: 2rem 0;
+}
+
+/* Product Slider: horizontal scroll area */
+.product-slider {
+  display: flex;
+  overflow-x: hidden;  /* Disable manual scrolling */
+  scroll-behavior: smooth;
+}
+
+/* Product Card Styles */
+.product-slider .product-card {
+  flex: 0 0 25%; /* 4 cards per view on larger screens */
+  box-sizing: border-box;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  transition: box-shadow 0.3s ease;
+}
+.product-slider .product-card:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 576px) {
+  /* On very small screens, show 2 cards per view */
+  .product-slider .product-card {
+    flex: 0 0 50%;
+  }
+}
+
+/* Simplified Arrow Controls */
+.slider-prev,
+.slider-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent; /* No background */
+  border: none;
+  font-size: 1.5rem;  /* Small arrow size */
+  color: #333;
+  cursor: pointer;
+  z-index: 1100;
+  padding: 0.2rem;
+}
+.slider-prev {
+  left: 0;
+}
+.slider-next {
+  right: 0;
+}
+
+
+/* Footer */
+/* Footer Styles */
+footer {
+  background-color: #F5F5DC;
+  padding: 30px 0;
+  border-top: 2px solid #D2B48C;
+  text-align: center;
+  color: #333;
+  font-size: 0.9rem;
+  font-family: 'Open Sans', sans-serif;
+}
+
+footer h5 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+footer p, 
+footer ul {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+footer a {
+  color: #D2B48C;
+  transition: color 0.3s ease;
+}
+footer a:hover {
+  color: #C0A16B;
+}
+
+footer ul.list-unstyled {
+  padding: 0;
+  list-style: none;
+}
+
+footer ul.list-inline {
+  padding: 0;
+  list-style: none;
+}
+
+footer ul.list-inline li {
+  margin-right: 10px;
+}
+/* Footer Social Media Icons */
+footer ul.list-inline li a svg {
+  transition: fill 0.3s ease;
+}
+footer ul.list-inline li a:hover svg {
+  fill: #C0A16B;
+}
+/* Footer Social Media Icons - Vertical List */
+footer ul.social-media-vertical {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Footer Social Media Icons - Vertical List */
+footer ul.social-media-vertical {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer ul.social-media-vertical li {
+  margin-bottom: 10px;
+}
+
+footer ul.social-media-vertical li a {
+  display: inline-block;
+  color: #D2B48C;
+  transition: color 0.3s ease;
+}
+
+footer ul.social-media-vertical li a:hover {
+  color: #C0A16B;
+}
+
+footer ul.social-media-vertical li a svg {
+  transition: fill 0.3s ease;
+}
+footer ul.social-media-vertical li a:hover svg {
+  fill: #C0A16B;
+}
+.btn-pink {
+  background-color: #FFB6C1; /* Light pink */
+  color: #fff;
+  border: none;
+  min-width: 480px; /* Default width for larger screens */
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.btn-pink:hover {
+  background-color: #FF8DAA;
+}
+
+/* For mobile screens */
+@media (max-width: 767px) {
+  .btn-pink {
+    min-width: 350px; /* Reduced width on mobile */
+  }
+}
+/* Customized "Aggiungi al carrello" Button (Bootstrap .btn-primary) */
+.btn-primary {
+  background-color: #dbc5a8;  /* Light taupe */
+  border-color: #dbc5a8;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  width: 240px;
+}
+@media (max-width: 100px) {
+  .btn-primary {
+    min-width: 50px;
+  }
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #C0A16B;  /* Slightly darker taupe */
+  border-color: #C0A16B;
+}
+/* Custom Frame for Homepage Intro */
+/* Custom Frame for Homepage Intro with Animated Gradient Background */
+/* Custom Frame for Offers Carousel */
+/* Custom Frame for Offers Carousel */
+/* Custom Frame for Offers Carousel with Fixed Height */
+.custom-frame {
+  max-width: 800px;
+  height: 300px;             /* Fixed height; adjust as needed */
+  border: 2px solid #D2B48C; /* Light taupe border */
+  border-radius: 10px;       /* Rounded corners */
+  background: linear-gradient(135deg, #F5F5DC, #FFF, #F5F5DC);
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+  padding: 2rem;             /* Padding inside the frame */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+  margin: 0 auto;            /* Center the frame horizontally */
+  display: flex;             /* Use flexbox for vertical centering */
+  flex-direction: column;
+  justify-content: center;   /* Vertically center content */
+  text-align: center;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.custom-frame h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.custom-frame p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+/* Custom styling for each product frame */
+.custom-product-frame {
+  border: 2px solid #D2B48C;   /* Light taupe border */
+  border-radius: 10px;         /* Rounded corners */
+  padding: 1rem;               /* Internal spacing */
+  background-color: #fff;      /* White background for contrast */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-product-frame:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Custom styling for the quantity input field */
+/* Creative Quantity Control */
+.quantity-control .input-group {
+  max-width: 200px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.quantity-control .btn {
+  background-color: #dbc5a8; /* Light taupe */
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.quantity-control .btn:hover {
+  background-color: #C0A16B;
+}
+
+.product-quantity {
+  text-align: center;
+  font-size: 1.1rem;
+  border-top: 1px solid #D2B48C;
+  border-bottom: 1px solid #D2B48C;
+  border-left: none;
+  border-right: none;
+  background-color: #fff;
+}
+
+/* Cart Page Table Styling */
+.cart-table {
+  background-color: #fff;
+  border: 2px solid #D2B48C; /* Light taupe border */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cart-table thead {
+  background-color: #dbc5a8;
+  color: #fff;
+}
+
+.cart-table thead th {
+  padding: 12px;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.cart-table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.cart-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.cart-table tbody tr:hover {
+  background-color: #FFEFD5; /* Light, warm accent on hover */
+}
+
+.cart-table tbody td {
+  padding: 12px;
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+
+.cart-image {
+  max-width: 50px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.cart-summary {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+
+/* Creative Contact Form Styles */
+/* Custom Contact Form Frame */
+.creative-contact-form {
+  background: rgba(245, 245, 220, 0.9);  /* Subtle beige background */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-top: 2rem;
+}
+.creative-contact-form:hover {
+  transform: scale(1.02);
+}
+
+/* Creative Input Fields and Textarea */
+/* Creative Input Fields and Textarea */
+/* Creative Input Fields and Textarea */
+/* Creative Input Fields and Textarea - Borderless */
+.creative-input {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(245,245,220,0.95));
+  border: none;
+  border-radius: 15px; /* Rounded corners remain */
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.creative-input:focus {
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255, 182, 193, 0.5);
+  outline: none;
+  transform: scale(1.05);
+}
+
+
+
+
+/* Gradient Button for "Invia Messaggio" */
+.btn-gradient {
+  background: linear-gradient(45deg, #FFB6C1, #FF8DAA);
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+  border-radius: 8px;
+}
+.btn-gradient:hover {
+  background: linear-gradient(45deg, #FF8DAA, #FFB6C1);
+}
+
+/* General Container Styling */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Cart Badge */
+/* Cart Badge */
+/* Cart Badge */
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #C0A16B;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Desktop Hamburger & Menu Container */
+.desktop-menu-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Larger Burger Icon for Desktop */
+.desktop-menu-toggle {
+  background: none;
+  border: none;
+  font-size: 2.5rem; /* Increased size */
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.desktop-menu-toggle:hover {
+  color: #C0A16B;
+}
+
+/* Desktop Horizontal Menu */
+.desktop-menu {
+  margin-left: 10px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px; /* Additional space between links */
+}
+
+.desktop-menu.expanded {
+  max-height: 120px;  /* Expanded height */
+  opacity: 1;
+  overflow: visible;  /* Ensure expanded items are not clipped */
+}
+
+/* Desktop Menu Items */
+.desktop-menu a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding-left: 140px;
+}
+
+.desktop-menu a:hover {
+  color: #FF8DAA;
+  transform: scale(1.1);
+}
+
+/* Ensure the last menu item expands from its right edge */
+.desktop-menu a:last-child {
+  transform-origin: right center;
+}
+
+
+
+/* Mobile menu styling remains as default */
+
+
+/* (Optional) Mobile menu styling remains unchanged */
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+{% comment %}
+  Contact Page Template: Displays a creative contact form with elegantly styled input fields.
+{% endcomment %}
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">Contatti</h1>
+  <p class="text-center lead">Per ulteriori informazioni, compila il modulo sottostante o contattaci direttamente.</p>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form method="post" action="/contact" id="contact_form" accept-charset="UTF-8" class="contact-form creative-contact-form">
+        <input type="hidden" name="form_type" value="contact" />
+        <input type="hidden" name="utf8" value="✓" />
+        <div class="form-group">
+          <label for="ContactFormName">Nome</label>
+          <input type="text" id="ContactFormName" class="form-control creative-input" name="contact[name]" placeholder="Il tuo nome" required>
+        </div>
+        <div class="form-group">
+          <label for="ContactFormEmail">Email</label>
+          <input type="email" id="ContactFormEmail" class="form-control creative-input" name="contact[email]" placeholder="La tua email" required>
+        </div>
+        <div class="form-group">
+          <label for="ContactFormMessage">Messaggio</label>
+          <textarea id="ContactFormMessage" class="form-control creative-input" name="contact[body]" rows="5" placeholder="Il tuo messaggio" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-gradient btn-lg">Invia Messaggio</button>
+      </form>
+    </div>
+  </div>
+</div>

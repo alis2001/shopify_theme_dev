@@ -1,0 +1,82 @@
+<header>
+  <!-- Desktop View -->
+  <div class="d-none d-lg-block">
+    <nav class="navbar navbar-light">
+      <div class="container d-flex align-items-center">
+        <!-- Desktop Hamburger & Horizontal Menu Container -->
+        <div class="desktop-menu-container d-flex align-items-center">
+          <button class="btn btn-link nav-link desktop-menu-toggle" type="button" id="desktopMenuToggle" aria-label="Toggle Menu">
+            &#9776;
+          </button>
+          <div class="desktop-menu">
+            <a class="desktop-menu-item" href="/">Home</a>
+            <a class="desktop-menu-item" href="/pages/prodotti">Prodotti</a>
+            <a class="desktop-menu-item" href="/pages/chi-siamo">Chi Siamo</a>
+            <a class="desktop-menu-item" href="/pages/contact">Contatti</a>
+          </div>
+        </div>
+        <div class="flex-grow-1"></div>
+        <!-- Cart Icon on the Right -->
+        <a class="nav-link position-relative" href="/cart" aria-label="Cart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#333" viewBox="0 0 24 24">
+            <path d="M7 4V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2h3a1 1 0 0 1 0 2h-1l-1.33 8H5.33L4 6H3a1 1 0 0 1 0-2h3zm2-2v2h6V2H9zM6.33 10h11.34l1.2 7.2a1 1 0 0 1-1 1.3H6.13a1 1 0 0 1-1-1.3L6.33 10z"/>
+            <circle cx="9" cy="20" r="1"/>
+            <circle cx="15" cy="20" r="1"/>
+          </svg>
+          {% if cart.item_count > 0 %}
+            <span class="cart-badge">{{ cart.item_count }}</span>
+          {% endif %}
+        </a>
+      </div>
+    </nav>
+  </div>
+  
+  <!-- Mobile View -->
+  <div class="d-lg-none">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white; min-height: 50px;">
+      <div class="container d-flex align-items-center">
+        <!-- Centered Mobile Toggler -->
+        <div class="mx-auto">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContentMobile" aria-controls="navbarContentMobile" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <!-- Cart Icon on the Right -->
+        <div class="ml-auto">
+          <a class="nav-link position-relative text-dark" href="/cart" aria-label="Cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#333" viewBox="0 0 24 24">
+              <path d="M7 4V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2h3a1 1 0 0 1 0 2h-1l-1.33 8H5.33L4 6H3a1 1 0 0 1 0-2h3zm2-2v2h6V2H9zM6.33 10h11.34l1.2 7.2a1 1 0 0 1-1 1.3H6.13a1 1 0 0 1-1-1.3L6.33 10z"/>
+              <circle cx="9" cy="20" r="1"/>
+              <circle cx="15" cy="20" r="1"/>
+            </svg>
+            {% if cart.item_count > 0 %}
+              <span class="cart-badge">{{ cart.item_count }}</span>
+            {% endif %}
+          </a>
+        </div>
+        <!-- Mobile Navigation Links (Vertical) -->
+        <div class="collapse navbar-collapse" id="navbarContentMobile">
+          <ul class="navbar-nav text-center">
+            <li class="nav-item"><a class="nav-link text-dark" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link text-dark" href="/pages/prodotti">Prodotti</a></li>
+            <li class="nav-item"><a class="nav-link text-dark" href="/pages/chi-siamo">Chi Siamo</a></li>
+            <li class="nav-item"><a class="nav-link text-dark" href="/pages/contact">Contatti</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<script>
+  (function(){
+    var toggle = document.getElementById('desktopMenuToggle');
+    var menu = document.querySelector('.desktop-menu');
+    
+    toggle.addEventListener('click', function(){
+      menu.classList.toggle('expanded');
+    });
+  })();
+</script>
+

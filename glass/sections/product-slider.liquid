@@ -1,0 +1,103 @@
+{% comment %}
+  Product Slider Section: Lists ALL products in the "featured" collection in a horizontally sliding row.
+  Manual scrolling is disabled; navigation is done solely via clickable arrow buttons.
+  The slider auto-advances smoothly using an easeInOutQuad easing function.
+{% endcomment %}
+
+{% assign products = collections.featured.products %}
+
+<div class="product-slider-container position-relative my-5">
+  <div class="product-slider" style="overflow-x: hidden;">
+    {% for product in products %}
+      <div class="product-card text-center">
+        <a href="{{ product.url }}">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" class="img-fluid mb-2">
+          {% else %}
+            <div class="bg-secondary text-white p-3 mb-2">No Image</div>
+          {% endif %}
+          <h3 class="h6">{{ product.title }}</h3>
+          <p class="price">{{ product.price | money }}</p>
+          {% if product.compare_at_price > product.price %}
+            <p class="compare-price" style="color: #888; font-size: 0.9rem;"><s>{{ product.compare_at_price | money }}</s></p>
+          {% endif %}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+  <!-- Simplified Arrow Controls -->
+  <button class="slider-prev" aria-label="Previous">&#9664;</button>
+  <button class="slider-next" aria-label="Next">&#9654;</button>
+</div>
+
+<script>
+  (function() {
+    var slider = document.querySelector('.product-slider');
+    var prevButton = document.querySelector('.slider-prev');
+    var nextButton = document.querySelector('.slider-next');
+    
+    // Calculate slide amount: width of one product card plus right margin (assumed 10px)
+    var slideAmount = document.querySelector('.product-card').offsetWidth + 10;
+    
+    // Function to perform an immediate slide with circular behavior
+    function slideBy(amount) {
+      var newScroll;
+      if (amount > 0) {
+        // Sliding right
+        if (slider.scrollLeft + slider.offsetWidth + amount >= slider.scrollWidth) {
+          // Wrap to the beginning if exceeding the end
+          newScroll = 0;
+        } else {
+          newScroll = slider.scrollLeft + amount;
+        }
+      } else {
+        // Sliding left
+        if (slider.scrollLeft + amount < 0) {
+          // Wrap to the end if moving past the beginning
+          newScroll = slider.scrollWidth - slider.offsetWidth;
+        } else {
+          newScroll = slider.scrollLeft + amount;
+        }
+      }
+      slider.scrollLeft = newScroll;
+    }
+    
+    // Auto-slide timer variables
+    var autoSlideTimeout;
+    var autoSlideDelay = 4000; // 7 seconds
+    
+    // Start auto-slide timer
+    function startAutoSlide() {
+      autoSlideTimeout = setTimeout(function() {
+        slideBy(slideAmount);
+        startAutoSlide();
+      }, autoSlideDelay);
+    }
+    
+    // Reset the auto-slide timer whenever an arrow is clicked
+    function resetAutoSlide() {
+      clearTimeout(autoSlideTimeout);
+      startAutoSlide();
+    }
+    
+    // Initialize auto-slide
+    startAutoSlide();
+    
+    // Event listeners for arrow controls
+    prevButton.addEventListener('click', function() {
+      slideBy(-slideAmount);
+      resetAutoSlide();
+    });
+    
+    nextButton.addEventListener('click', function() {
+      slideBy(slideAmount);
+      resetAutoSlide();
+    });
+    
+    // Update slideAmount on window resize
+    window.addEventListener('resize', function() {
+      slideAmount = document.querySelector('.product-card').offsetWidth + 10;
+    });
+  })();
+</script>
+

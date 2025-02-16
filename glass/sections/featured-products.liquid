@@ -1,0 +1,24 @@
+<div class="featured-products">
+  <div class="container">
+    <h2>Prodotti in Evidenza</h2>
+    <div class="row">
+      {% assign featured_collection = collections.featured %}
+      {% if featured_collection %}
+        {% for product in featured_collection.products %}
+          <div class="col-md-4">
+            <div class="product-card">
+              <a href="{{ product.url }}">
+                <h3>{{ product.title }}</h3>
+                <p>Prezzo: {{ product.price | money }}</p>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12">
+          <p class="text-center">Nessun prodotto in evidenza al momento.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

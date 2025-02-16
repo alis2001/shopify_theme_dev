@@ -1,0 +1,122 @@
+{% comment %}
+  Product Page Template
+  - Displays product images (main + thumbnails)
+  - Shows title, pricing, discount comparison (if any)
+  - Includes a creative quantity selector with minus/plus buttons
+  - "Aggiungi al carrello" button to add to cart
+  - "Acquista Ora" button to add to cart via AJAX and redirect to checkout
+{% endcomment %}
+
+<div class="container my-5 product-page">
+  <div class="row">
+    <!-- Left Column: Product Images -->
+    <div class="col-md-6">
+      {% if product.images.size > 0 %}
+        <div class="product-images">
+          <!-- Main Image -->
+          <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}" class="img-fluid mb-3">
+          {% if product.images.size > 1 %}
+            <!-- Thumbnails -->
+            <div class="product-thumbnails d-flex">
+              {% for image in product.images %}
+                <div class="thumb mr-2">
+                  <img src="{{ image | img_url: 'small' }}" alt="{{ product.title }}" class="img-thumbnail">
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      {% else %}
+        <div class="bg-secondary text-white p-5 text-center">Nessuna immagine disponibile</div>
+      {% endif %}
+    </div>
+    
+    <!-- Right Column: Product Details -->
+    <div class="col-md-6">
+      <h1 class="mb-3">{{ product.title }}</h1>
+      <p class="price h4">{{ product.price | money }}</p>
+      {% if product.compare_at_price > product.price %}
+        <p class="compare-price" style="color: #888; font-size: 1rem;">
+          <s>{{ product.compare_at_price | money }}</s>
+        </p>
+      {% endif %}
+      <div class="product-description my-4">
+        {{ product.description }}
+      </div>
+      
+      {% if product.available %}
+        <!-- Add to Cart Form with Creative Quantity Selector -->
+        <form id="addToCartForm" method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          <div class="form-group quantity-control">
+            <label for="quantity">Quantità:</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button type="button" class="btn btn-outline-secondary qty-decrement" aria-label="Decrease Quantity">−</button>
+              </div>
+              <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control product-quantity" readonly>
+              <div class="input-group-append">
+                <button type="button" class="btn btn-outline-secondary qty-increment" aria-label="Increase Quantity">+</button>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Aggiungi al carrello</button>
+        </form>
+        <!-- Buy Now Button -->
+        <button id="buyNowBtn" class="btn btn-pink btn-lg mt-3">Acquista Ora</button>
+        <p class="mt-3">Pagamento sicuro, spedizione veloce e garanzia di soddisfazione.</p>
+      {% else %}
+        <p class="text-danger">Prodotto non disponibile</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    // Quantity Control
+    var decrementButton = document.querySelector('.qty-decrement');
+    var incrementButton = document.querySelector('.qty-increment');
+    var quantityInput = document.getElementById('quantity');
+
+    if(decrementButton && incrementButton && quantityInput) {
+      decrementButton.addEventListener('click', function(){
+        var currentValue = parseInt(quantityInput.value, 10);
+        if(currentValue > 1) {
+          quantityInput.value = currentValue - 1;
+        }
+      });
+
+      incrementButton.addEventListener('click', function(){
+        var currentValue = parseInt(quantityInput.value, 10);
+        quantityInput.value = currentValue + 1;
+      });
+    }
+
+    // Buy Now Button: Add to Cart via AJAX and redirect to Checkout
+    var buyNowBtn = document.getElementById('buyNowBtn');
+    var addToCartForm = document.getElementById('addToCartForm');
+
+    if(buyNowBtn && addToCartForm) {
+      buyNowBtn.addEventListener('click', function() {
+        var formData = new FormData(addToCartForm);
+        fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData,
+          credentials: 'same-origin'
+        })
+        .then(function(response) {
+          if(response.ok) {
+            window.location.href = '/checkout';
+          } else {
+            alert('Si è verificato un errore. Riprova.');
+          }
+        })
+        .catch(function(error) {
+          console.error('Error:', error);
+          alert('Si è verificato un errore. Riprova.');
+        });
+      });
+    }
+  })();
+</script>
